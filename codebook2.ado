@@ -16,13 +16,17 @@ quietly {
     ** Sheet: Dataset
      * =========================================================================
     putexcel set "`using'", sheet("Dataset") `replace' `modify' open
-    local row = 2
+    local row = 1
 
     describe, varlist
     local sorted = "`r(sortlist)'"
+
+    ** Filename
+    putexcel`row' = "Dataset" b`row' = "`c(filename)'"
+
     ** Label
     local lab: data label
-    putexcel A`row' = "Label" B`row' = "`lab'"
+    putexcel A`++row' = "Label" B`row' = "`lab'"
 
     ** Notes
     putexcel A`++row' = "Notes"
@@ -45,6 +49,8 @@ quietly {
     putexcel B`row' = (`r(N)'), nformat(number_sep)
 
     putexcel A`++row' = "Sorted by" B`row' = "`sorted'"
+
+    putexcel A`++row' = "Dataset last update" B`row' = "`c(filedate)'"
 
     putexcel close
 
