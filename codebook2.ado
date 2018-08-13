@@ -22,7 +22,7 @@ quietly {
     local sorted = "`r(sortlist)'"
 
     ** Filename
-    if regexm("`c(filenale)'", "^(.*/)([^/]*)$") {
+    if regexm("`c(filename)'", "^(.*/)([^/]*)$") {
         local path = regexs(1)
         local filename = regexs(2)
     }
