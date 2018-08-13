@@ -112,6 +112,9 @@ quietly {
     local ++r
     }
 
+    ** Go back one row
+    local --r
+    putexcel (A`r':F`r'), border(bottom)
     putexcel (F1:F`r'), border(right)
 
     putexcel close
