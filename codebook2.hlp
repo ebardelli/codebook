@@ -26,7 +26,7 @@ help for {hi:codebook2} {right:(Emanuele Bardelli)}
 
 {title:Examples}
 
-    {cmd:. gzsave myfile}
+    {cmd:. codebook2 using codebook.xls}
 
 {title:Author}
 
@@ -34,7 +34,7 @@ help for {hi:codebook2} {right:(Emanuele Bardelli)}
 
 {title:Acknowledgements}
 
-{p 4 4 2} Education Policy Initiative and the State of Michigan for financially support the development of this package. 
+{p 4 4 2} Institute for Educational Sciences, the Education Policy Initiative, and the State of Michigan for partially funding the development of this package. 
 
 {title:Also see}
 
