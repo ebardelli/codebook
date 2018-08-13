@@ -33,10 +33,10 @@ quietly {
     putexcel A`++row' = "Label" B`row' = "`lab'"
 
     ** Notes
+    local notes = ""
     putexcel A`++row' = "Notes"
     notes _count k : _dta
     if `k' > 0 {
-        local notes = ""
         forvalues i = 1/`k' {
             notes _fetch n`i' : _dta `i'
             putexcel B`row' = "`n`i''"
@@ -95,6 +95,7 @@ quietly {
         putexcel E`r' = "`lab_name'"
 
         ** Variable notes
+        local notes = ""
         notes _count k : "`x'"
         if `k' > 0 {
             forvalues i = 1/`k' {
@@ -134,6 +135,7 @@ quietly {
         local lab: variable label `var'
         putexcel A`++r' = "Label" B`r' = "`lab'"
         ** Notes
+        local notes = ""
         notes _count k : "`var'"
         if `k' > 0 {
             forvalues i = 1/`k' {
