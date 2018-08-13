@@ -1,0 +1,16 @@
+d 'CODEBOOK2': module to generate codebooks
+d
+d This module generates codebooks using putexcel
+d
+d KW: codebook
+d KW: putexcel
+d
+d Requires: Stata version 15.1
+d
+d Distribution-Data: 20180813
+d
+d Author: Emanuele Bardelli, School of Education, University of Michigan
+d Support: email bardelli@umich.edu
+d
+f codebook2.ado
+f codebook2.hlp
