@@ -199,8 +199,8 @@ quietly {
             }
 
             putexcel A`++r' = ("Total") 
-            putexcel B`r'=(r(N)), nformat(number_sep)
-            putexcel C`r' = (100.00), nformat(number_d2)
+            putexcel C`r'=(r(N)), nformat(number_sep)
+            putexcel D`r' = (100.00), nformat(number_d2)
         }
 
         ** Add an empty line between variables
