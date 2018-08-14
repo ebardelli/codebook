@@ -10,7 +10,7 @@ help for {hi:codebook2} {right:(Emanuele Bardelli)}
 
 {title:Description}
 
-{p 4 4 2} {cmd:codebook2} generates a codebook for the loaded dataset. If a {it:varlist} is specified, the command will include detailed statistics for all variables in {it:varlist}. 
+{p 4 4 2} {cmd:codebook2} generates a codebook for the loaded dataset. If a {it:varlist} is specified, the command will include detailed statistics for all variables in {it:varlist}. Note that by default no variables are used. If you want to include detailed statistics for all variables use the {it:_all} keyword.
 
 {title:Options}
 
@@ -20,21 +20,15 @@ help for {hi:codebook2} {right:(Emanuele Bardelli)}
 
 {p 4 8 2}putexcel_options are all options available with {help putexcel}.
 
-{title:Remarks}
-
-{p 4 4 2} These commands are useful for two purposes: 
-
 {title:Examples}
 
     {cmd:. codebook2 using codebook.xls}
 
+    {cmd:. codebook2 _all using codebook.xlsx, replace}
+
 {title:Author}
 
 {p 4 4 2} Emanuele Bardelli ({browse "mailto:bardelli@umich.edu":bardelli@umich.edu}), School of Education, University of Michigan, USA.
-
-{title:Acknowledgements}
-
-{p 4 4 2} Institute for Educational Sciences, the Education Policy Initiative, and the State of Michigan for partially funding the development of this package. 
 
 {title:Also see}
 
