@@ -61,7 +61,8 @@ quietly {
 
     putexcel A`++row' = "Last update" B`row' = "`c(filedate)'"
     putexcel A`++row' = "Path" B`row' = "`path'"
-    putexcel A`++row' = "Notebook processed by" B`row' = "`c(username)'"
+    putexcel A`++row' = "Prepared by" B`row' = "`c(username)'"
+    putexcel A`++row' = "Prepared on" B`row' = "`c(current_date)' `c(current_time)'"
 
     cap putexcel close
 
@@ -103,7 +104,21 @@ quietly {
 
         ** Value codes
         local lab_name : value label `x'
-        putexcel E`r' = "`lab_name'"
+        local labels = ""
+        if "`lab_name'"!="" {
+            qui tab `x', matrow(c)
+            local j = rowsof(c)
+            forv i = 1/`j' {
+                local a = c[`i',1]
+                if "`a'" != "" {
+                    local b: label (`x') `a'
+                }
+                local labels = "`labels' `a': `b'"
+                local ++i
+            }
+        }
+        local labels = strltrim("`labels'")
+        putexcel E`r' = "`labels'"
 
         ** Variable notes
         local notes = ""
