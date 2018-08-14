@@ -190,16 +190,17 @@ quietly {
                     local val_lab : label (`var') `val'
 
                     local freq_val = freq[`i',1]
+                    local percent_val = `freq_val' / `r(N)' * 100
+                    local cum_percent = `cum_percent' + `percent_val'
 
-                    local percent_val = `freq_val'/`r(N)'*100
-                    local percent_val : display %9.2f `percent_val'
-
-                    local cum_percent : display %9.2f (`cum_percent' + `percent_val')
-
-                    putexcel A`++r' = ("`val_lab'") B`r' = (`val')  C`r' = (`freq_val') D`r' = (`percent_val') E`r' = (`cum_percent')
+                    putexcel A`++r' = ("`val_lab'") 
+                    putexcel B`r' = (`val')  C`r' = (`freq_val'), nformat(number_sep)
+                    putexcel D`r' = (`percent_val') E`r' = (`cum_percent'), nformat(number_d2)
             }
 
-            putexcel A`++r' = ("Total") B`r'=(r(N)) C`r' = (100.00)
+            putexcel A`++r' = ("Total") 
+            putexcel B`r'=(r(N)), nformat(number_sep)
+            putexcel C`r' = (100.00), nformat(number_d2)
         }
 
         ** Add an empty line between variables
