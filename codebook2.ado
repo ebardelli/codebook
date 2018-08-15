@@ -105,17 +105,24 @@ quietly {
         ** Value codes
         local lab_name : value label `x'
         local labels = ""
+
         if "`lab_name'"!="" {
             qui tab `x', matrow(c)
             local j = rowsof(c)
+
             forv i = 1/`j' {
                 local a = c[`i',1]
                 if "`a'" != "" {
                     local b: label (`x') `a'
                 }
+
                 if "`labels'" == "" {
+                    local labels = "`a': `b'"
+                }
+                else {
                     local labels = "`labels'`=char(10)'`a': `b'"
                 }
+
                 local ++i
             }
         }
