@@ -113,11 +113,12 @@ quietly {
                 if "`a'" != "" {
                     local b: label (`x') `a'
                 }
-                local labels = "`labels' `a': `b'"
+                if "`labels'" == "" {
+                    local labels = "`labels'`=char(10)'`a': `b'"
+                }
                 local ++i
             }
         }
-        local labels = strltrim("`labels'")
         putexcel E`r' = "`labels'"
 
         ** Variable notes
