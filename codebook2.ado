@@ -106,24 +106,25 @@ quietly {
         local lab_name : value label `x'
         local labels = ""
 
-        if "`lab_name'"!="" {
-            qui tab `x', matrow(c)
-            local j = rowsof(c)
+        if "`lab_name'" != "" {
+            quietly levelsof `x', local(var_levels)
+            local i = 0
 
-            forv i = 1/`j' {
-                local a = c[`i',1]
-                if "`a'" != "" {
-                    local b: label (`x') `a'
-                }
+            foreach var_level of local var_levels {
+                local value_label : label (`x') `var_level'
 
                 if "`labels'" == "" {
-                    local labels = "`a': `b'"
+                    local labels = "`var_level': `value_label'"
                 }
                 else {
-                    local labels = "`labels'`=char(10)'`a': `b'"
+                    local labels = "`labels'`=char(10)'`var_level': `value_label'"
                 }
 
                 local ++i
+                if `i' > 24 {
+                    local labels = "`labels'`=char(10)'(...)"
+                    continue, break
+                } 
             }
         }
         putexcel E`r' = "`labels'"
