@@ -1,1 +1,1 @@
-p codebook2 module to generate codebooks
+p cb2excel module to generate codebooks

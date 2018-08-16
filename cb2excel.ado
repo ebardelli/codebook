@@ -7,8 +7,8 @@
  */
 
 version 13
-cap program drop codebook2
-program define codebook2
+cap program drop cb2excel
+program define cb2excel
 quietly {
     syntax [varlist(defaul=none)] using/, [replace modify prefix(string)]
     cap putexcel close

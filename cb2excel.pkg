@@ -1,4 +1,4 @@
-d 'CODEBOOK2': module to generate codebooks
+d 'CB2EXCEL': module to generate codebooks
 d
 d This module generates codebooks using putexcel
 d
@@ -12,5 +12,7 @@ d
 d Author: Emanuele Bardelli, School of Education, University of Michigan
 d Support: email bardelli@umich.edu
 d
-f codebook2.ado
-f codebook2.hlp
+f cb2excel.ado
+f cb2excel.hlp
+f cb2dofile.ado
+f cb2dofile.hlp
