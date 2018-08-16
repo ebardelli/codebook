@@ -123,7 +123,7 @@ quietly {
                 }
 
                 local ++i
-                if `i' > 24 {
+                if `i' > 25 {
                     local labels = "`labels'`=char(10)'(...)"
                     continue, break
                 } 
