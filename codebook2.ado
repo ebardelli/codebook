@@ -70,11 +70,11 @@ quietly {
     ** Sheet: Variable List
      * =========================================================================
     if `c(version)' < 15 {
-        putexcel set "`using'", sheet("`prefix'Variable List", replace) modify
+        putexcel set "`using'", sheet("`prefix'Variables", replace) modify
         putexcel B1 = "Test"
     }
     else {
-        putexcel set "`using'", sheet("`prefix'Variable List", replace) modify open
+        putexcel set "`using'", sheet("`prefix'Variables", replace) modify open
     }
 
     putexcel B1 = "Variable Name" C1 = "Variable Label" D1 = "Variable Type" ///
