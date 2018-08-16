@@ -17,6 +17,7 @@ quietly {
      * =========================================================================
     if `c(version)' < 15 {
         putexcel set "`using'", sheet("`prefix'Dataset", replace) `replace' `modify'
+        putexcel A1 = "Test"
     }
     else {
         putexcel set "`using'", sheet("`prefix'Dataset", replace) `replace' `modify' open
@@ -70,6 +71,7 @@ quietly {
      * =========================================================================
     if `c(version)' < 15 {
         putexcel set "`using'", sheet("`prefix'Variable List", replace) modify
+        putexcel B1 = "Test"
     }
     else {
         putexcel set "`using'", sheet("`prefix'Variable List", replace) modify open
@@ -161,6 +163,7 @@ quietly {
      if !missing("`varlist'") {
         if `c(version)' < 15 {
             putexcel set "`using'", sheet("`prefix'Details", replace) modify
+            putexcel A1 = "Test"
         }
         else {
             putexcel set "`using'", sheet("`prefix'Details", replace) modify open
