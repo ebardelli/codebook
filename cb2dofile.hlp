@@ -1,0 +1,41 @@
+{smcl}
+{* 13Aug2018}
+{hline}
+help for {hi:codebook2} {right:(Emanuele Bardelli)}
+{hline}
+
+{title:Generage codebooks using putexcel}
+
+{p 8 13 2}{cmd:codebook2} [varlist] [{helpb using} {it:filename}] [{cmd:,} {it:options} {it:putexcel_options}]
+
+{title:Description}
+
+{p 4 4 2} {cmd:codebook2} generates a codebook for the loaded dataset. If a {it:varlist} is specified, the command will include detailed statistics for all variables in {it:varlist}. Note that by default no variables are used. If you want to include detailed statistics for all variables use the {it:_all} keyword.
+
+{title:Options}
+
+{p 4 8 2}{cmd:replace} permits codebook2 to overwrite an existing codebook. {cmd:replace} may not be abbreviated.
+
+{p 4 8 2}{cmd:modify} permits to update an existing codebook.
+
+{p 4 8 2}putexcel_options are all options available with {help putexcel}.
+
+{title:Examples}
+
+    {cmd:. codebook2 using codebook.xls}
+
+    {cmd:. codebook2 _all using codebook.xlsx, replace}
+
+{title:Author}
+
+{p 4 4 2} Emanuele Bardelli ({browse "mailto:bardelli@umich.edu":bardelli@umich.edu}), School of Education, University of Michigan, USA.
+
+{title:Also see}
+
+{p 4 13 2}
+Manual:  {hi:[R] putexcel}
+
+{p 4 13 2}
+Online: help for {help putexcel}. 
+{p_end}
+
