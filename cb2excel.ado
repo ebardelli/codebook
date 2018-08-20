@@ -172,8 +172,7 @@ quietly {
             putexcel A`++r' = "Variable" B`r' = "`var'", bold
 
             ** Label
-            local lab: variable label `var'
-            putexcel A`++r' = "Label" B`r' = "`lab'"
+            putexcel A`++r' = "Label" B`r' = "`lbe'"
             ** Notes
             local notes = ""
             notes _count k : "`var'"
@@ -192,11 +191,11 @@ quietly {
 
             ** Missing values
             count if missing(`var')
-            scalar miss = r(N)
-            scalar p_miss = miss / _N
+            local miss = `r(N)'
+            local p_miss : display `miss' / _N
             putexcel A`++r' = "Missing"
-            putexcel B`r' = miss, nformat(number_sep)
-            putexcel C`r' = p_miss, nformat(percent_d2)
+            putexcel B`r' = `miss', nformat(number_sep)
+            putexcel C`r' = `p_miss', nformat(percent_d2)
 
             local t : type `var'
             if regexm("`t'", "int|float|double") & "`lbe'" == "" {
@@ -215,9 +214,9 @@ quietly {
             }
 
             if "`lbe'"! = "" {
-                quietly count if !missing(`x')
-                scalar N = r(N)
-                scalar cum_percent = 0
+                quietly count if !missing(`var')
+                local N = `r(N)'
+                local cum_percent = 0
 
                 quietly levelsof `var', local(var_levels)
                 local i = 0
@@ -226,18 +225,19 @@ quietly {
                     local value_label : label (`var') `var_level'
 
                     quietly count if `var' == `var_level'
-                    scalar freq_val = r(N)
-                    scalar percent_val = freq_val / N * 100
-                    scalar cum_percent = cum_percent + percent_val
+                    local freq_val = `r(N)'
+                    local percent_val : display `freq_val' / `N' * 100
+                    local cum_percent : display `cum_percent' + `percent_val'
 
                     putexcel A`++r' = ("`value_label'")
-                    putexcel B`r' = (`var_level')  C`r' = (freq_val), nformat(number_sep)
-                    putexcel D`r' = (percent_val) E`r' = (cum_percent), nformat(number_d2)
+                    putexcel B`r' = (`var_level')
+                    putexcel C`r' = (`freq_val'), nformat(number_sep)
+                    putexcel D`r' = (`percent_val') E`r' = (`cum_percent'), nformat(number_d2)
 
                 }
                 putexcel A`++r' = ("Total")
-                putexcel C`r' = (N), nformat(number_sep)
-                putexcel D`r' = (cum_percent), nformat(number_d2)
+                putexcel C`r' = (`N'), nformat(number_sep)
+                putexcel D`r' = (`cum_percent'), nformat(number_d2)
             }
 
             ** Add an empty line between variables
