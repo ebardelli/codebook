@@ -10,7 +10,7 @@ version 13
 cap program drop cb2excel
 program define cb2excel
 quietly {
-    syntax [varlist(defaul=none)] using/, [replace modify prefix(string)]
+    syntax [varlist(defaul=none)] using/, [replace modify prefix(string) maxlabels(integer 100)]
     cap putexcel close
 
     ** Sheet: Dataset
@@ -236,7 +236,7 @@ quietly {
 
                     local i = `i' + 1
 
-                    if `i' > 100 {
+                    if `i' > `maxlabels' {
                         putexcel A`++r' = ("...")
                         continue, break
                     }
