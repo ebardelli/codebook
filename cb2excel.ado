@@ -57,7 +57,6 @@ quietly {
     putexcel A`++row' = "Sorted by" B`row' = "`sorted'"
 
     putexcel A`++row' = "Last update" B`row' = "`c(filedate)'"
-    putexcel A`++row' = "Path" B`row' = "`c(pwd)'"
     putexcel A`++row' = "Prepared by" B`row' = "`c(username)'"
     putexcel A`++row' = "Prepared on" B`row' = "`c(current_date)' `c(current_time)'"
 
