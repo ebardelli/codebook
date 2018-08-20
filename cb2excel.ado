@@ -234,6 +234,12 @@ quietly {
                     putexcel C`r' = (`freq_val'), nformat(number_sep)
                     putexcel D`r' = (`percent_val') E`r' = (`cum_percent'), nformat(number_d2)
 
+                    local i = `i' + 1
+
+                    if `i' > 100 {
+                        putexcel A`++r' = ("...")
+                        continue, break
+                    }
                 }
                 putexcel A`++r' = ("Total")
                 putexcel C`r' = (`N'), nformat(number_sep)
