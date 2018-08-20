@@ -126,7 +126,7 @@ quietly {
                 if `i' > 25 {
                     local labels = "`labels'`=char(10)'(...)"
                     continue, break
-                } 
+                }
             }
         }
         putexcel E`r' = "`labels'"
@@ -197,11 +197,11 @@ quietly {
 
             ** Missing values
             count if missing(`var')
-            local miss = `r(N)'
-            local p_miss : display `miss' / _N
+            scalar miss = r(N)
+            scalar p_miss = miss / _N
             putexcel A`++r' = "Missing"
-            putexcel B`r' = `miss', nformat(number_sep)
-            putexcel C`r' = `p_miss', nformat(percent_d2)
+            putexcel B`r' = miss, nformat(number_sep)
+            putexcel C`r' = p_miss, nformat(percent_d2)
 
             local t : type `var'
             if regexm("`t'", "int|float|double") & "`lbe'" == "" {
@@ -220,32 +220,29 @@ quietly {
             }
 
             if "`lbe'"! = "" {
-                ** Code from Stata Blog: https://blog.stata.com/2013/09/25/export-tables-to-excel/
-                tabulate `var', matcell(freq) matrow(names)
+                quietly count if !missing(`x')
+                scalar N = r(N)
+                scalar cum_percent = 0
 
-                putexcel A`++r' = ("Labels") B`r' = ("Value") C`r' = ("Freq.") D`r' = ("Percent") E`r' = ("Cum.")
+                quietly levelsof `var', local(var_levels)
+                local i = 0
 
-                local rows = rowsof(names)
-                local row = 2
-                local cum_percent = 0
+                foreach var_level of local var_levels {
+                    local value_label : label (`var') `var_level'
 
-                forvalues i = 1/`rows' {
+                    quietly count if `var' == `var_level'
+                    scalar freq_val = r(N)
+                    scalar percent_val = freq_val / N * 100
+                    scalar cum_percent = cum_percent + percent_val
 
-                        local val = names[`i',1]
-                        local val_lab : label (`var') `val'
+                    putexcel A`++r' = ("`value_label'")
+                    putexcel B`r' = (`var_level')  C`r' = (freq_val), nformat(number_sep)
+                    putexcel D`r' = (percent_val) E`r' = (cum_percent), nformat(number_d2)
 
-                        local freq_val = freq[`i',1]
-                        local percent_val = `freq_val' / `r(N)' * 100
-                        local cum_percent = `cum_percent' + `percent_val'
-
-                        putexcel A`++r' = ("`val_lab'") 
-                        putexcel B`r' = (`val')  C`r' = (`freq_val'), nformat(number_sep)
-                        putexcel D`r' = (`percent_val') E`r' = (`cum_percent'), nformat(number_d2)
                 }
-
-                putexcel A`++r' = ("Total") 
-                putexcel C`r'=(r(N)), nformat(number_sep)
-                putexcel D`r' = (100.00), nformat(number_d2)
+                putexcel A`++r' = ("Total")
+                putexcel C`r' = (N), nformat(number_sep)
+                putexcel D`r' = (cum_percent), nformat(number_d2)
             }
 
             ** Add an empty line between variables
