@@ -28,11 +28,7 @@ quietly {
     local sorted = "`r(sortlist)'"
 
     ** Filename
-    if regexm("`c(filename)'", "^(.*/)([^/]*)$") {
-        local path = regexs(1)
-        local filename = regexs(2)
-    }
-    putexcel A`row' = "Dataset" B`row' = "`filename'"
+    putexcel A`row' = "Dataset" B`row' = "`c(filename)'"
 
     ** Label
     local lab: data label
@@ -61,7 +57,7 @@ quietly {
     putexcel A`++row' = "Sorted by" B`row' = "`sorted'"
 
     putexcel A`++row' = "Last update" B`row' = "`c(filedate)'"
-    putexcel A`++row' = "Path" B`row' = "`path'"
+    putexcel A`++row' = "Path" B`row' = "`c(pwd)'"
     putexcel A`++row' = "Prepared by" B`row' = "`c(username)'"
     putexcel A`++row' = "Prepared on" B`row' = "`c(current_date)' `c(current_time)'"
 
