@@ -10,7 +10,10 @@ version 13
 cap program drop cb2excel
 program define cb2excel
 quietly {
-    syntax [varlist(defaul=none)] using/, [replace modify prefix(string) label_sep(string "`=char(10)'") label_max(integer 25) label_detail(integer 100)]
+    syntax [varlist(defaul=none)] using/, [replace modify prefix(string) label_sep(string) label_max(integer 25) label_detail(integer 100)]
+    if "`label_sep'" == "" {
+        local label_sep = "`=char(10)'"
+    }
     cap putexcel close
 
     ** Sheet: Dataset
