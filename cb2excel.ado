@@ -10,7 +10,7 @@ version 13
 cap program drop cb2excel
 program define cb2excel
 quietly {
-    syntax [varlist(defaul=none)] using/, [replace modify prefix(string) maxlabels(integer 100)]
+    syntax [varlist(defaul=none)] using/, [replace modify prefix(string) label_sep(string "") label_max(integer 25)] label_detail(integer 100)
     cap putexcel close
 
     ** Sheet: Dataset
@@ -114,12 +114,12 @@ quietly {
                     local labels = "`var_level': `value_label'"
                 }
                 else {
-                    local labels = "`labels'`=char(10)'`var_level': `value_label'"
+                    local labels = "`labels'`label_sep'`var_level': `value_label'"
                 }
 
                 local ++i
-                if `i' > 25 {
-                    local labels = "`labels'`=char(10)'(...)"
+                if `i' > `label_max' {
+                    local labels = "`labels'`label_sep'(...)"
                     continue, break
                 }
             }
@@ -236,7 +236,7 @@ quietly {
 
                     local i = `i' + 1
 
-                    if `i' > `maxlabels' {
+                    if `i' > `label_detail' {
                         putexcel A`++r' = ("...")
                         continue, break
                     }
