@@ -10,13 +10,15 @@ version 13
 cap program drop cb2dofile
 program define cb2dofile
 quietly {
-    syntax, Codebook(string) DOfile(string) [sheet(passthru) firstrow clear]
+    syntax, Codebook(string) DOfile(string) [sheet(passthru) firstrow clear replace preserve]
+    `preserve'
+
     cap putexcel close
 
     import excel "`codebook'", `sheet' `firstrow' `clear'
     drop if missing(VariableLabel)
 
-    file open dofile using "`dofile'", write text replace
+    file open dofile using "`dofile'", write text `replace'
     local handle = "dofile"
 
     local N = _N
@@ -28,6 +30,10 @@ quietly {
         file write `handle' `"`=char(34)'"'
         file write `handle' _n
     }
-    file close dofile  
+    file close dofile
+
+    if "`preserve'" != "" {
+        restore
+    }
 }
 end

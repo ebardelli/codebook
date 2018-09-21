@@ -15,16 +15,11 @@ help for {hi:cb2excel} {right:(Emanuele Bardelli)}
 {title:Options}
 
 {p 4 8 2}{cmd:replace} permits cb2excel to overwrite an existing codebook. {cmd:replace} may not be abbreviated.
-
 {p 4 8 2}{cmd:modify} permits to update an existing codebook.
-
-{p 4 8 2}{cmd:prefix(string)} specifies a prefix for the excel sheet. Keep in mind that excel has a character limit for sheet names.
-
 {p 4 8 2}{cmd:label_max(number)} specifies the max number of labels to include in the Variables sheet. Default for this is 26.
-
-{p 4 8 2}{cmd:label_sep(string)} specifies a separator for the labels in the Variables sheet. Default is a new line. 
-
- {p 4 8 2}{cmd:label_detail(number)} specifies the max number of labels to print in the detailed sheet. Default for this is 100 labels.  
+{p 4 8 2}{cmd:label_sep(string)} specifies a separator for the labels in the Variables sheet. Default is a new line.
+{p 4 8 2}{cmd:label_detail(number)} specifies the max number of labels to print in the detailed sheet. Default for this is 100 labels.
+{p 4 8 2}{cmd:labels} saves the label values to the {it:Labels} sheet.
 
 {p 4 8 2}putexcel_options are all options available with {help putexcel}.
 
@@ -44,6 +39,6 @@ help for {hi:cb2excel} {right:(Emanuele Bardelli)}
 Manual:  {hi:[R] putexcel}
 
 {p 4 13 2}
-Online: help for {help putexcel}. 
+Online: help for {help putexcel}.
 {p_end}
 
