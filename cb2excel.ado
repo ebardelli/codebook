@@ -260,8 +260,12 @@ quietly {
      if !missing("`labels'") {
         preserve
 
+        putexcel set "`using'", sheet("`prefix'Labels", replace) modify
+        putexcel A1 = "Label Name" B1 = "Value" C1 = "Label" D1 = "Is Truncated?"
+        cap putexcel close
+
         uselabel
-        export excel using "`using'", sheet("`prefix'Labels") sheetmodify
+        export excel using "`using'", sheet("`prefix'Labels") sheetmodify cell(A2)
 
         restore
      }
