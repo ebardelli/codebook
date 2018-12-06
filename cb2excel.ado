@@ -1,7 +1,7 @@
 /*
  * Codebook
  *
- * Version 0.1
+ * Version 20181206
  * Emanuele Bardelli <bardelli@umich.edu>
  *
  */
@@ -10,7 +10,8 @@ version 13
 cap program drop cb2excel
 program define cb2excel
 quietly {
-    syntax [varlist(defaul=none)] using/, [replace modify prefix(string) label_sep(string) label_max(integer 25) label_detail(integer 100) labels]
+    syntax [varlist(defaul=none)] using/ [, replace modify labels prefix(string) label_sep(string) label_max(integer 25) label_detail(integer 100)]
+
     if "`label_sep'" == "" {
         local label_sep = "`=char(10)'"
     }
@@ -104,7 +105,7 @@ quietly {
 
         ** Value codes
         local lab_name : value label `x'
-        local labels = ""
+        local labels_ = ""
 
         if "`lab_name'" != "" {
             quietly levelsof `x', local(var_levels)
@@ -113,21 +114,21 @@ quietly {
             foreach var_level of local var_levels {
                 local value_label : label (`x') `var_level'
 
-                if "`labels'" == "" {
-                    local labels = "`var_level': `value_label'"
+                if "`labels_'" == "" {
+                    local labels_ = "`var_level': `value_label'"
                 }
                 else {
-                    local labels = "`labels'`label_sep'`var_level': `value_label'"
+                    local labels_ = "`labels_'`label_sep'`var_level': `value_label'"
                 }
 
                 local ++i
                 if `i' > `label_max' {
-                    local labels = "`labels'`label_sep'(...)"
+                    local labels_ = "`labels_'`label_sep'(...)"
                     continue, break
                 }
             }
         }
-        putexcel E`r' = "`labels'"
+        putexcel E`r' = "`labels_'"
 
         ** Variable notes
         local notes = ""
