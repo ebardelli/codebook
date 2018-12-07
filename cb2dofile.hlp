@@ -4,38 +4,35 @@
 help for {hi:codebook2} {right:(Emanuele Bardelli)}
 {hline}
 
-{title:Generage codebooks using putexcel}
+{title:Generate a dofile to label dataset from a codebook}
 
-{p 8 13 2}{cmd:codebook2} [varlist] [{helpb using} {it:filename}] [{cmd:,} {it:options} {it:putexcel_options}]
+{p 8 13 2}{cmd:cb2dofile}{cmd:,} {cmd:codebook(}{it:filename}{cmd:)} {cmd:dofile(}{it:filename}{cmd:)} [{it:sheet} {it:firstrow} {it:clear} {it:preserve} {it:replace}]
 
 {title:Description}
 
-{p 4 4 2} {cmd:codebook2} generates a codebook for the loaded dataset. If a {it:varlist} is specified, the command will include detailed statistics for all variables in {it:varlist}. Note that by default no variables are used. If you want to include detailed statistics for all variables use the {it:_all} keyword.
+{p 4 4 2} {cmd:cb2excel} generates a do file that can be used to label a dataset from an excel codebook.
 
 {title:Options}
 
-{p 4 8 2}{cmd:replace} permits codebook2 to overwrite an existing codebook. {cmd:replace} may not be abbreviated.
+{p 4 8 2}{cmd:codebook(}{it:filename}{cmd:)} identifies the excel codebook.
 
-{p 4 8 2}{cmd:modify} permits to update an existing codebook.
+{p 4 8 2}{cmd:dofile(}{it:filename}{cmd:)} identifies the do file that will be generated.
 
-{p 4 8 2}putexcel_options are all options available with {help putexcel}.
+{p 4 8 2}{cmd:sheet} specifies the codebook sheet to read.
+
+{p 4 8 2}{cmd:firstrow} indicated that the sheet first row has variable names.
+
+{p 4 8 2}{cmd:clear} clears data currently in memory.
+
+{p 4 8 2}{cmd:preserve} preserves data currently in memory.
+
+{p 4 8 2}{cmd:replace} replaces the do file.
 
 {title:Examples}
 
-    {cmd:. codebook2 using codebook.xls}
-
-    {cmd:. codebook2 _all using codebook.xlsx, replace}
+    {cmd:. cb2dofile, codebook(cbook.xls) sheet(labels) firstrow dofile(labels.do) replace}
 
 {title:Author}
 
-{p 4 4 2} Emanuele Bardelli ({browse "mailto:bardelli@umich.edu":bardelli@umich.edu}), School of Education, University of Michigan, USA.
-
-{title:Also see}
-
-{p 4 13 2}
-Manual:  {hi:[R] putexcel}
-
-{p 4 13 2}
-Online: help for {help putexcel}. 
-{p_end}
-
+{p 4 4 2} Emanuele Bardelli ({browse "mailto:bardelli@umich.edu":bardelli@umich.edu}), School of Education,
+University of Michigan, USA.
